@@ -1,7 +1,6 @@
 # Vorsortieren: sortieren statt abrufen – Streamlit-Demo
 
-<!-- TODO nach dem Deploy: direkt hierher den Live-Link setzen (Leerzeile davor und danach):
-**[→ Demo live ausprobieren](https://sebastianhanisch-vorsortieren-umstauen-demo.streamlit.app/)** -->
+**[→ Demo live ausprobieren](https://sebastianhanisch-vorsortieren-umstauen-demo.streamlit.app/)**
 
 Elftes Stück der Konzepte-Reihe **„Umstauen: Untergrenze und Suche“** für die Website „Sebastian Hanisch – Operations Research und Machine Learning“. Bisher wurde **beim Abruf** umgelagert (Stück 1 bis 10). Beim **Pre-Marshalling** wird die Bucht **vorher sortiert**: Kein Container darf über einem früher abzurufenden liegen, dann kostet der Abruf keinen Hub mehr. Erlaubt ist **jeder** Hub eines obersten Containers auf einen anderen Stapel mit Platz. Die Demo **rechnet das live** auf kleinen Buchten und misst vorberechnet, **ab wie vielen freien Plätzen** eine Bucht überhaupt sortierbar ist, **wie schwach die Untergrenze** (Blocker zählen) hier ist und **ob Vorsortieren Hübe spart** gegenüber dem Umlagern beim Abruf.
 
