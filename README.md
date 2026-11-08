@@ -6,7 +6,7 @@ Elftes Stück der Konzepte-Reihe **„Umstauen: Untergrenze und Suche“** für 
 
 ## Warum dieses Problem
 
-Vorsortieren klingt nach einer sicheren Sache: einmal sortieren, danach nie wieder umlagern. Zwei Messungen bremsen das. **Erstens** geht es nicht immer: Mit **weniger freien Plätzen als eine Stapelhöhe** ist ein großer Teil der Buchten **unlösbar** (3 × 3 mit 2 freien Plätzen: 23 von 60 Buchten lösbar, mit 1 freien Platz 3 von 60); ab einer Stapelhöhe freier Plätze waren in allen gemessenen Zellen alle Buchten lösbar. **Zweitens** ist es **teurer** als Umlagern beim Abruf: Das Optimum des Pre-Marshalling ist 1,2- bis 1,7-fach so groß wie das des Relocation und nur in 0 bis 2 von 60 Buchten kleiner. Vorsortieren spart keine Hübe, es **verschiebt** sie in die ruhige Zeit. Und die einfache Untergrenze (Zahl der Blocker) ist hier **schwach**: Bei wenigen freien Plätzen liegt das Optimum beim Zwei- bis Zweieinhalbfachen.
+Vorsortieren klingt nach einer sicheren Sache: einmal sortieren, danach nie wieder umlagern. Zwei Messungen bremsen das. **Erstens** geht es nicht immer: Mit **weniger freien Plätzen als eine Stapelhöhe** ist ein großer Teil der Buchten **unlösbar** (3 × 3 mit 2 freien Plätzen: 23 von 60 Buchten lösbar, mit 1 freien Platz 3 von 60); ab einer Stapelhöhe freier Plätze waren in den drei vollständig durchgerechneten Zellen alle Buchten lösbar (in den größeren Zellen mit IDA\* sind bei genug Platz einzelne Buchten ungelöst, sie sind nur am Limit). **Zweitens** ist es **teurer** als Umlagern beim Abruf: Das Optimum des Pre-Marshalling ist 1,2- bis 1,7-fach so groß wie das des Relocation und nur in 0 bis 2 von 60 Buchten kleiner. Vorsortieren spart keine Hübe, es **verschiebt** sie vom Abruf in die Zeit davor (wenn es diese Ruhezeit gibt; im Modell nicht gemessen). Und die einfache Untergrenze (Zahl der Blocker) ist hier **schwach**: Bei wenigen freien Plätzen liegt das Optimum beim Zwei- bis Dreifachen (3 × 3 und 4 × 3 mit 2 frei: 2,5; 3 × 4 mit 3 frei: 3,2).
 
 ## Modell
 
@@ -92,9 +92,9 @@ Die Lösbarkeit **springt**: unterhalb von *F* = *H* (3 × 3: 3, 4 × 3: 3, 3 ×
 |---|---|
 | **Geht das Sortieren immer?** | Nein. Mit weniger freien Plätzen als eine Stapelhöhe sind die meisten Buchten unlösbar (bewiesen: der erreichbare Zustandsraum enthält keine sortierte Bucht), ab einer Stapelhöhe waren alle 180 Buchten der drei durchgerechneten Zellen lösbar. |
 | **Das kleinste Beispiel?** | Die Hand-Bucht (1, 4, 7), (5, 2, 6), (3, 8) mit Höchsthöhe 3 und **einem** freien Platz: nur sechs erreichbare Zustände, in allen sechs bleiben vier Blocker. Die Untergrenze hätte „4“ gesagt, ohne zu merken, dass es nicht geht. |
-| **Wie schwach ist die Untergrenze?** | Bei wenigen freien Plätzen das Zwei- bis Zweieinhalbfache vom Optimum (4 × 3 mit 2 freien Plätzen: 5,63 gegen 2,26), bei vielen freien Plätzen nahe (4 × 3 mit 6 frei: 1,40 gegen 1,10). Bei *F* = *H* trifft sie nur in 10 von 60 (4 × 3) und 4 von 60 (3 × 4) Buchten. |
-| **Spart Vorsortieren Hübe?** | Nein: im Mittel 1,2- bis 1,7-fach so viele wie das Umlagern beim Abruf; billiger nur in 0 bis 2 von 60 Buchten. Es verschiebt die Hübe in die ruhige Zeit, was die Hubzahl nicht abbildet. |
-| **Und größere Zellen?** | Bis 6 × 3 und 5 × 4 mit IDA\* gerechnet: Optimum / Untergrenze liegt zwischen 1,4 (5 × 3 mit 4 und 5 frei) und 2,4 (3 × 5 mit 5 frei); die Zellen mit der engsten Platzlage (5 × 4, 6 × 3 mit 3 frei) lösen nur 14 bis 34 von 40 in der Knotengrenze. |
+| **Wie schwach ist die Untergrenze?** | Bei wenigen freien Plätzen das Zwei- bis Dreifache vom Optimum (4 × 3 mit 2 freien Plätzen: 5,63 gegen 2,26; 3 × 4 mit 3 frei: 8 gegen 2,50), bei vielen freien Plätzen nahe (4 × 3 mit 6 frei: 1,40 gegen 1,10). Bei *F* = *H* trifft sie nur in 10 von 60 (4 × 3) und 4 von 60 (3 × 4) Buchten. |
+| **Spart Vorsortieren Hübe?** | Nein: im Mittel 1,2- bis 1,7-fach so viele wie das Umlagern beim Abruf; billiger nur in 0 bis 2 von 60 Buchten. Es verschiebt die Hübe vom Abruf in die Zeit davor (wenn es diese Ruhezeit gibt; im Modell nicht gemessen), was die Hubzahl nicht abbildet. |
+| **Und größere Zellen?** | Bis 6 × 3 und 5 × 4 mit IDA\* gerechnet: Optimum / Untergrenze liegt zwischen 1,4 (5 × 3 mit 4 und 5 frei) und 2,4 (3 × 5 mit 5 frei); die Zellen mit der engsten Platzlage (5 × 4, 6 × 3 mit 3 frei) lösen nur 14 bis 34 von 40 in der Knotengrenze. Die Verhältnisse sind nur über die gelösten Buchten gemittelt; ungelöste sind eher schwerer. |
 
 **Presets** (Eigenschaften in `tests/test_presets.py`): „Genug Platz“ (4 × 3, 3 frei, Bucht 0: Optimum 7, Untergrenze 4, Umlagern 4), „Ein freier Platz“ (4 × 3, Bucht 0: unlösbar, 24 Zustände), „Zwei frei: lösbar“ (4 × 3, Bucht 2: 6 Hübe gegen Untergrenze 2), „Zwei frei: unlösbar“ (4 × 3, Bucht 0: 7 200 Zustände, keiner sortiert), „Viel Platz“ (4 × 3, 6 frei, Bucht 1: 3 Hübe), „Vorsortieren lohnt nicht“ (3 × 4, 4 frei, Bucht 4: 8 gegen 4).
 
@@ -104,7 +104,7 @@ Die Lösbarkeit **springt**: unterhalb von *F* = *H* (3 × 3: 3, 4 × 3: 3, 3 ×
 
 - **Messung, kein Satz.** „Ab einer Stapelhöhe freier Plätze lösbar“ ist an drei Zellen gemessen (je 60 Buchten); größere Zellen nur mit IDA\*, ungelöste Buchten dort sind am Limit, nicht bewiesen unlösbar.
 - **Zufallsbuchten** (jeder Container auf einen zufälligen Stapel mit Platz, ungleich hohe Stapel); echte Buchten sind oft teilweise sortiert.
-- **Eine Prioritätsordnung ohne Gruppen:** alle Nummern verschieden; mit Gruppen gleicher Priorität (üblich in der Literatur) ist das Sortieren leichter.
+- **Eine Prioritätsordnung ohne Gruppen:** alle Nummern verschieden; mit Gruppen gleicher Priorität (üblich in der Literatur) dürfte das Sortieren leichter sein (nicht gemessen).
 - **Nur die Hubzahl:** Kranzeit, Fahrwege und Zeitfenster zählen nicht (Brücke zur Linie „Zielfunktion“).
 - **Relocation restricted** im Vergleich; im unrestricted Relocation wäre das Umlagern nicht teurer.
 - **Stärkere Untergrenzen** (Bortfeldt und Forster, Tierney u. a.) nicht gebaut.
@@ -162,7 +162,7 @@ pip install -r requirements-dev.txt
 pytest tests/ -v
 ```
 
-99 Tests, rund eine Minute.
+99 Tests, rund zweieinhalb Minuten (auf diesem Rechner gemessen, je nach Last).
 
 Gebaut mit Streamlit und Plotly.
 

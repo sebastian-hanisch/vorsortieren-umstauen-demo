@@ -228,7 +228,7 @@ def verdict_vs(stats: dict, name: str) -> tuple[str, str]:
     text = (f"{name}: Vorsortieren braucht im Mittel {dec(stats['p'])} Hübe, das Umlagern beim Abruf {dec(stats['r'])}: das {ratio_text(r)}-Fache; "
             f"billiger ist das Vorsortieren in {stats['smaller']} von {stats['n']} Buchten, gleich teuer in {stats['equal']}, teurer in {stats['larger']}.")
     if r >= C.VS_BIG:
-        return "warning", text + " Vorsortieren spart hier keine Hübe, es verschiebt sie nur in die ruhige Zeit."
+        return "warning", text + " Vorsortieren spart hier keine Hübe; es verschiebt sie vom Abruf in die Zeit davor (im Modell nicht gemessen)."
     if r >= C.VS_SMALL:
         return "info", text + " Vorsortieren kostet hier etwas mehr Hübe als das Umlagern beim Abruf."
     return "success", text + " Vorsortieren kostet hier kaum mehr als das Umlagern beim Abruf."

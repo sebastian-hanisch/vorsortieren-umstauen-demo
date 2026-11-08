@@ -126,7 +126,7 @@ st.markdown("---")
 
 st.subheader("🔬 Experiment: Eine Bucht, die sich nicht sortieren lässt")
 hs = _hand_states()
-st.caption("3 Stapel der Höchsthöhe 3, 8 Container, **ein** freier Platz; von unten nach oben (1, 4, 7), (5, 2, 6), (3, 8). Die 1 liegt unter der 4 und der 7, die 5 unter der 2 und der 6: "
+st.caption("3 Stapel der Höchsthöhe 3, 8 Container, **ein** freier Platz; von unten nach oben (1, 4, 7), (5, 2, 6), (3, 8). Die 1 liegt unter der 4 und der 7, die 2 unter der 6, die 3 unter der 8: "
            "Alle drei Stapel enthalten Blocker.")
 st.plotly_chart(build_bay(C.HAND_BAY, C.HAND_HEIGHT), width="stretch", key="chart_hand")
 ht = ["| Erreichbarer Zustand | Blocker |", "|---|---|"]
@@ -215,8 +215,8 @@ st.markdown(
 |---|---|---|
 | **Messung, kein Satz** | „Ab einer Stapelhöhe freier Plätze lösbar“ ist an drei Zellen gemessen (je 60 Buchten, 180 Buchten mit genug Platz alle lösbar); kein Beweis. Größere Zellen nur mit IDA\\*: ungelöste Buchten sind dort am Limit, nicht bewiesen unlösbar. | – |
 | **Zufallsbuchten** | Jeder Container landet auf einem zufälligen Stapel mit Platz; die Stapel sind ungleich hoch (andere Familie als die vollen Buchten der Stücke davor). Echte Buchten sind oft schon teilweise sortiert. | – |
-| **Eine einzige Prioritätsordnung** | Alle Container haben verschiedene Nummern; mit Gruppen gleicher Priorität (üblich in der Literatur) ist das Sortieren leichter. | – |
-| **Nur die Hubzahl** | Kranzeit, Fahrwege und Zeitfenster zählen nicht; Vorsortieren verschiebt Arbeit in die ruhige Zeit, was die Hubzahl nicht abbildet. | Zielfunktionsdesign (Linie „Zielfunktion“) |
+| **Eine einzige Prioritätsordnung** | Alle Container haben verschiedene Nummern; mit Gruppen gleicher Priorität (üblich in der Literatur) dürfte das Sortieren leichter sein (nicht gemessen). | – |
+| **Nur die Hubzahl** | Kranzeit, Fahrwege und Zeitfenster zählen nicht; Vorsortieren kann Arbeit vom Abruf in die Zeit davor verschieben (im Modell nicht gemessen), was die Hubzahl nicht abbildet. | Zielfunktionsdesign (Linie „Zielfunktion“) |
 | **Relocation restricted** | Der Vergleich nutzt das restricted Relocation (nur Container über dem Ziel); im unrestricted Relocation wäre das Umlagern nicht teurer. | Stück 3 |
 | **Stärkere Untergrenzen nicht gebaut** | Die Untergrenze hier zählt nur Blocker; für das Pre-Marshalling gibt es stärkere (Bortfeldt und Forster, Tierney u. a.), aus dem Gedächtnis zitiert und nicht gelesen. | – |
 """
@@ -235,7 +235,7 @@ with st.expander("📐 Mathematische Formulierung"):
 
 **Exakte Suche.** Zustände = Bucht bis auf Vertauschen der Stapel. Die Breitensuche vom Anfangszustand über alle Hübe findet in Tiefe $d$ den ersten sortierten Zustand: $d = \text{OPT}$. Erschöpft sie den erreichbaren Zustandsraum ohne sortierten Zustand, ist die Bucht **unlösbar**.
 
-**Freie Plätze.** Mit $F = 0$ ist kein Hub möglich; mit $F = 1$ kann nur auf den einen Stapel mit Platz gesetzt werden (so entsteht der kleine Zustandsraum der Hand-Bucht). Die Messung zeigt: Ist $F$ kleiner als eine Stapelhöhe $H$, ist ein großer Teil der Buchten unlösbar; ab $F = H$ waren in den gemessenen Zellen alle lösbar (kein Beweis).
+**Freie Plätze.** Mit $F = 0$ ist kein Hub möglich; mit $F = 1$ kann nur auf den einen Stapel mit Platz gesetzt werden (so entsteht der kleine Zustandsraum der Hand-Bucht). Die Messung zeigt: Ist $F$ kleiner als eine Stapelhöhe $H$, ist ein großer Teil der Buchten unlösbar; ab $F = H$ waren in den drei vollständig durchgerechneten Zellen alle lösbar (kein Beweis).
 
 **Relocation beim Abruf.** Zum Vergleich das Optimum des restricted Relocation derselben Bucht (Stück 5 bis 9): bei jedem Abruf werden nur die Container über dem Ziel bewegt. Das Vorsortieren muss alle Blocker bewegen **und** dabei eine ganze sortierte Anordnung herstellen; das Umlagern bewegt nur, was beim Abruf im Weg liegt.
 

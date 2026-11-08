@@ -78,7 +78,7 @@ def _vs(p, r, smaller=0, equal=22, larger=38):
 def test_vs_verdict_three_states_and_numbers():
     kind, text = ev.verdict_vs(_vs(3.38, 2.05), "3 × 3, 3 frei")
     assert kind == "warning" and text == ("3 × 3, 3 frei: Vorsortieren braucht im Mittel 3,38 Hübe, das Umlagern beim Abruf 2,05: das 1,6-Fache; "
-                                          "billiger ist das Vorsortieren in 0 von 60 Buchten, gleich teuer in 22, teurer in 38. Vorsortieren spart hier keine Hübe, es verschiebt sie nur in die ruhige Zeit.")
+                                          "billiger ist das Vorsortieren in 0 von 60 Buchten, gleich teuer in 22, teurer in 38. Vorsortieren spart hier keine Hübe; es verschiebt sie vom Abruf in die Zeit davor (im Modell nicht gemessen).")
     assert ev.verdict_vs(_vs(1.5, 1.0), "x")[0] == "warning" and ev.verdict_vs(_vs(1.49, 1.0), "x")[0] == "info" and C.VS_BIG == 1.5
     kind, text = ev.verdict_vs(_vs(1.1, 1.0), "x")
     assert kind == "info" and text.endswith("Vorsortieren kostet hier etwas mehr Hübe als das Umlagern beim Abruf.") and C.VS_SMALL == 1.1
