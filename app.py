@@ -63,9 +63,20 @@ st.markdown(
     """
 Bisher wurde **beim Abruf** umgelagert (Stück 1 bis 10). Beim **Pre-Marshalling** wird die Bucht **vorher sortiert**: kein Container darf über einem früher abzurufenden liegen, dann kostet der Abruf keinen Hub mehr. Erlaubt ist **jeder** Hub eines obersten Containers auf einen anderen Stapel mit Platz. Die Demo **rechnet das live** auf kleinen Buchten und misst vorberechnet, **ab wie vielen freien Plätzen** eine Bucht überhaupt sortierbar ist, **wie schwach die Untergrenze** (Blocker zählen) hier ist und **ob Vorsortieren Hübe spart** gegenüber dem Umlagern beim Abruf.
 
-Weiter unten: die Abschnitte **🔬 Experiment** (die Bucht von Hand, Lösbarkeit nach freien Plätzen, die Untergrenze, Vorsortieren gegen Umlagern), **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**. Dies ist das elfte Stück der Reihe „Umstauen: Untergrenze und Suche“.
+Wer zuerst ohne Fachbegriffe verstehen will, worum es geht, öffnet „💬 In einfachen Worten“. Weiter unten: die Abschnitte **🔬 Experiment** (die Bucht von Hand, Lösbarkeit nach freien Plätzen, die Untergrenze, Vorsortieren gegen Umlagern), **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**. Dies ist das elfte Stück der Reihe „Umstauen: Untergrenze und Suche“.
 """
 )
+
+# erklaerseite:einfach:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/vorsortieren-umstauen-erklaert.json, nicht von Hand ändern)
+with st.expander("💬 In einfachen Worten"):
+    st.markdown(
+        """
+Auf einem Lagerplatz stehen Container in Stapeln und werden in bekannter Reihenfolge abgeholt. Liegt der gesuchte nicht oben, müssen die darüber umgestapelt werden. Die Demo fragt, ob es sich lohnt, die Stapel schon vorher zu ordnen, damit beim Abholen nichts mehr im Weg liegt. Sie rechnet kleine Plätze mit einem Suchverfahren vollständig durch und zeigt zwei Haken. Erstens lässt sich bei zu wenig freien Plätzen ein großer Teil der Plätze gar nicht ordnen. Zweitens braucht das Ordnen im Mittel mehr Handgriffe als das Umstapeln erst beim Abholen. Es verlegt die Arbeit nur in die Zeit davor. Die Plätze sind zufällig gefüllt, und gezählt werden nur Handgriffe, keine Zeit.
+
+[Ausführlich und verständlich erklärt, mit Fachteil](https://sebastianhanisch.net/vorsortieren-umstauen-erklaert.html)
+        """
+    )
+# erklaerseite:einfach:end
 
 with st.expander("So wird gemessen", expanded=True):
     st.markdown(
@@ -225,6 +236,25 @@ st.markdown(
 st.markdown("---")
 
 with st.expander("📐 Mathematische Formulierung"):
+    # erklaerseite:lesehilfe:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/vorsortieren-umstauen-erklaert.json, nicht von Hand ändern)
+    st.markdown(
+        r"""
+**Lesehilfe.** Gegeben sind $S$ Stapel der Höchsthöhe $H$ und $N$ Container mit den Nummern $1, \dots, N$ (kleiner heißt früher abzurufen), dazu $F$ freie Plätze. Ein Hub setzt den obersten Container eines Stapels auf einen anderen Stapel mit freiem Platz. Gesucht ist die kleinste Hubzahl bis zu einer sortierten Bucht, in der in jedem Stapel die Nummern von unten nach oben fallen.
+
+| Symbol | Bedeutung |
+|---|---|
+| $S$, $H$ | Zahl der Stapel und Höchsthöhe eines Stapels |
+| $N$ | Zahl der Container (Nummern $1, \dots, N$, kleiner = früher abzurufen) |
+| $F$ | Zahl der freien Plätze, $F = S\,H - N$ |
+| Blocker | Container, unter dem im selben Stapel ein Container mit kleinerer Nummer liegt |
+| $\text{LB1}$ | Untergrenze: Zahl der Blocker |
+| $\text{OPT}$ | kleinste Hubzahl bis zu einer sortierten Bucht |
+| $d$ | Tiefe der Breitensuche, in der der erste sortierte Zustand auftaucht |
+
+[Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/vorsortieren-umstauen-erklaert.html#fachleute)
+        """
+    )
+    # erklaerseite:lesehilfe:end
     st.markdown(
         r"""
 **Gegeben:** $S$ Stapel mit Höchsthöhe $H$, $N$ Container mit den Nummern $1, \dots, N$ (kleiner = früher abzurufen), $F = S\,H - N$ freie Plätze.
