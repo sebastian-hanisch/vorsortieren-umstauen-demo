@@ -16,7 +16,7 @@ Vorsortieren klingt nach einer sicheren Sache: einmal sortieren, danach nie wied
 - **Ziel:** jeder Stapel **sortiert**: von unten nach oben fallende Nummern, also kein **Blocker** (Container über einem früher abzurufenden).
 - **Hub:** der oberste Container eines Stapels auf einen anderen Stapel mit freiem Platz; Kosten 1.
 - **Untergrenze:** Zahl der Blocker (jeder muss mindestens einmal bewegt werden).
-- **Exakt:** Breitensuche über kanonische Zustände (Stapel sortiert). Das erste sortierte Ziel ist optimal; erschöpft die Suche den Zustandsraum ohne Ziel, ist die Bucht **bewiesen unlösbar**. Größere Zellen: IDA\* mit der Untergrenze und Zustandsmerken (findet das Optimum, wenn es lösbar ist).
+- **Exakt:** Breitensuche über kanonische Zustände (Stapel sortiert). Das erste sortierte Ziel ist optimal; erschöpft die Suche den Zustandsraum ohne Ziel, ist die Bucht **bewiesen unlösbar**. Größere Zellen: IDA\* mit der Untergrenze und einer Transposition Table (findet das Optimum, wenn es lösbar ist).
 - **Vergleich:** Optimum des Relocation beim Abruf derselben Bucht (restricted, Stück 5 bis 9).
 
 ## Methodik
